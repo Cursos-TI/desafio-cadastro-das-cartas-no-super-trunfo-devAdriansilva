@@ -1,15 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
 int main() {
+    srand(time(0));
     // declaração das variáveis
     char estado, estado1;
-    char codigo[4], codigo1[4];
+    char codigo[4], codigo1[4], atributo[20];
     char cidade[20], cidade1[20];
     unsigned long int populacao, populacao1;
     float area, area1,densidade_populacional, densidade_populacional1, super_poder, super_poder1;
     double pib, pib1,pib_percapita, pib_percapita1;
     int pontos_turisticos, pontos_turisticos1;
-    int result, result1;
-
+    int result, result1, escolha;
+    
+    
 
     //Entrada de dados para a carta 1
     printf("CARTA 1: \n");
@@ -92,8 +98,6 @@ int main() {
      printf("Densidade Populacional: %.2lf\n",densidade_populacional);
      printf("PIB per Capita: %.2lf\n", pib_percapita);
 
-     
-
      printf("\n");
 
     // Resultado da captura de dados referentes à carta 2 
@@ -108,34 +112,72 @@ int main() {
      printf("Densidade Populacional: %.2lf \n",densidade_populacional1);
      printf("PIB per Capita: %.2lf \n", pib_percapita1);
 
-
-     printf("\n");
-     printf("Comparação de cartas:\n");
-     result = populacao > populacao1;
-     printf("População: Carta 1 venceu?  %d \n", result);
-     result = area > area1;
-     printf("Área: Carta 1 venceu? %d \n", result);
-     result = pib > pib1;
-     printf("PIB: Carta 1 venceu? %d \n", result);
-     result = pontos_turisticos > pontos_turisticos1;
-     printf("Pontos Turísticos: Carta 1 venceu? %d \n", result);
-     result = densidade_populacional > densidade_populacional1;
-     printf("Densidade Populacional: Carta 2 venceu? %d \n", result);
-     result = pib_percapita > pib_percapita1;
-     printf("PIB per Capita; Carta 1 venceu? %d \n", result);
-     result = super_poder > super_poder1;
-     printf("Super Poder: Carta 1 venceu? %d \n", result );
-
-    if (populacao > populacao1)
-    {
-        printf("A carta 1 venceu\n");
-        printf("A populacão de %d é maior que a população da carta 2 que é de  %d  habitantes.", populacao, populacao1);
-    } else {
-        printf("A carta 2 venceu\n");
-        printf("A população de %d é maior que a população da carta 1 que é  de %d habitantes.", populacao1, populacao);
-    }
+    printf("Escolha o atributo para a batalha:\n ");
+    printf("1 -> População \n");
+    printf("2 -> Área \n");
+    printf("3 -> PIB \n");
+    printf("4 -> Pontos Turisticos \n");
+    printf("5 -> Densidade demográfica \n");
+    printf("\n");
+    scanf("%d", &escolha);
     
+   float valor1, valor2;
+   switch (escolha)
+   {
+   case 1:
+    valor1 = populacao;
+    valor2 = populacao1;
+    strcpy(atributo, "população");
+    break;
+   case 2:
+    valor1 = area;
+    valor2 = area1;
+    strcpy(atributo, "Área");
+    break;
+   case 3:
+    valor1 = pib;
+    valor2 = pib1;
+    strcpy(atributo, "PIB");
+    break;
+   case 4:
+    valor1 = pontos_turisticos;
+    valor2 = pontos_turisticos1;
+    strcpy(atributo, "Pontos Turísticos");
+    break;
+   case 5:
+    valor1 = densidade_populacional;
+    valor2 = densidade_populacional1;
+    strcpy(atributo, "Dens. Demográfica");
+    break;   
+   default:
+    printf("Opção inválida!!");
+    break;
+   }
+   
 
+if (escolha == 5) {  
+    if (valor1 < valor2) {
+        printf("Carta 1 venceu!\n");
+    } else if (valor2 < valor1) {
+        printf("Carta 2 venceu!\n");
+    } else {
+        printf("Empate!\n");
+    }
+} else {  
+    if (valor1 > valor2) {
+        printf("Carta 1 venceu!\n");
+    } else if (valor2 > valor1) {
+        printf("Carta 2 venceu!\n");
+    } else {
+        printf("Empate!\n");
+    }
+}
+printf("\nResumo da batalha:\n");
+printf("Atributo escolhido: %s\n", atributo);
+printf("Carta 1 (%s): %.2f\n", codigo, valor1);
+printf("Carta 2 (%s): %.2f\n", codigo1, valor2);
 
+    
+    
     return 0;
 }
